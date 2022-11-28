@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: big-dog-nginx
-        image: 10.19.2.92:32000/big-dog-nginx:registry
+        image: 10.19.2.92:32000/big-dog-nginx
         ports:
         - containerPort: 80
 
