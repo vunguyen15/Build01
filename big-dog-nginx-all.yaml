@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: big-dog-nginx-deployment
+  labels:
+    app: nginx
+spec:
+  selector:
+    matchLabels:
+      app: big-dog-nginx
+  template:
+    metadata:
+      labels:
+        app: big-dog-nginx
+    spec:
+      containers:
+      - name: big-dog-nginx
+        image: 10.19.2.92:32000/big-dog-nginx:registry
+        ports:
+        - containerPort: 80
+---
+	
+apiVersion: v1
+kind: Service
+metadata:
+  name: big-dog-nginx-svc
+  labels:
+    app: big-dog-nginx-svc
+spec:
+  type: NodePort
+  selector:
+    app: big-dog-nginx
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    nodePort: 30039
+    protocol: TCP
