@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service01
+spec:
+    ingressClassName: kong
+    rules:
+      - http:
+          paths:
+          - path: /service01
+            pathType: Prefix
+            backend:
+              service:
+                name: service01
+                port:
+                  number: 8917
