@@ -1,6 +1,12 @@
-FROM python:3.12-rc-buster
+		Download
+FROM public.ecr.aws/sam/build-python3.8:1.52.0-20220610003848
+ENV TZ="Asia/Ho_Chi_Minh"
 
-WORKDIR /python-docker
+RUN mkdir /code
+WORKDIR /code
+
+ADD  . .
+COPY . .
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
