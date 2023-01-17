@@ -1,0 +1,21 @@
+// Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent {
+        label 'master'
+    }
+
+    stages {
+        stage('Build jar') {
+            steps {
+                script {
+                        sh 'sh build-image.sh'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            deleteDir() /* clean up our workspace */
+        }
+    }
+}
