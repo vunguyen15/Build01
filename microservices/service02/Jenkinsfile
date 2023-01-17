@@ -5,7 +5,7 @@ pipeline {
         stage('Build jar') {
             steps {
                 script {
-                        sh 'sh build-image.sh'
+                        sh 'sh ./microservices/service02/build-image.sh'
                 }
             }
         }
