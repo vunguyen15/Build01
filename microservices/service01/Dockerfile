@@ -1,4 +1,3 @@
-		Download
 FROM public.ecr.aws/sam/build-python3.8:1.52.0-20220610003848
 ENV TZ="Asia/Ho_Chi_Minh"
 
