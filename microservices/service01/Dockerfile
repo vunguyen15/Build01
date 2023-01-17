@@ -4,8 +4,8 @@ ENV TZ="Asia/Ho_Chi_Minh"
 RUN mkdir /code
 WORKDIR /code
 
-ADD  . .
-COPY . .
+ADD  microservices/service01 .
+COPY microservices/service01 .
 
 RUN pip install -U pip
 RUN pip install -r requirements.txt
