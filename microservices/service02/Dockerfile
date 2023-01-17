@@ -1,10 +1,13 @@
-FROM python:3.12-rc-buster
+FROM public.ecr.aws/sam/build-python3.8:1.52.0-20220610003848
+ENV TZ="Asia/Ho_Chi_Minh"
 
-WORKDIR /python-docker
+RUN mkdir /code
+WORKDIR /code
 
-COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+ADD  microservices/service02 .
+COPY microservices/service02 .
 
-COPY . .
+RUN pip install -U pip
+RUN pip install -r requirements.txt
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+EXPOSE 5000

@@ -10,4 +10,4 @@ COPY microservices/service01 .
 RUN pip install -U pip
 RUN pip install -r requirements.txt
 
-EXPOSE 7777
+EXPOSE 5000
