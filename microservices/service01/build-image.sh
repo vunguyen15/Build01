@@ -3,7 +3,7 @@
 #remove images
 docker rmi $(docker images '192.168.56.2:32000/service01' -a -q)
 
-docker build --no-cache=true -t 192.168.56.2:32000/service01 .  -f ./microservices/service01/Jenkinsfile
+docker build --no-cache=true -t 192.168.56.2:32000/service01 .  -f ./microservices/service01/Dockerfile
 echo "Finish build docker images  "
 
 echo "Begin Push Images to Local Docker Repository"
