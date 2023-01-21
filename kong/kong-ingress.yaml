@@ -2,12 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: http-ingress
+  namespace: kong
   annotations: 
       kubernetes.io/ingress.class: public
       nginx.ingress.kubernetes.io/proxy-body-size: "20m"
 spec:
   rules:
-  # - host: hie.ytedongthap.vn
+  # - host: duytran.localhost
   - http:
       paths:
       - path: /
