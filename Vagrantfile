@@ -1,6 +1,7 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/bionic64"
-
+  config.vm.box = "ubuntu/focal64"
+  config.winrm.timeout = 1800 # 30 minutes
+  config.vm.boot_timeout = 1800 # 30 minutes
   config.vm.provider "virtualbox" do |vb|
       vb.memory = 4096
       vb.cpus = 2
@@ -26,7 +27,7 @@ Vagrant.configure("2") do |config|
       vb.name = "microk8s-master-01"
     end
     microk8s_master_01.vm.provision "shell", inline: <<-EOF
-      export local_ip="$(ip route | grep default | grep enp0s9 | cut -d' ' -f9)"
+      export local_ip="$(ip route | grep enp0s9 | cut -d' ' -f9)"
       echo $local_ip
       microk8s.add-node | grep $local_ip | tee /vagrant/add_k8s
     EOF
@@ -39,9 +40,7 @@ Vagrant.configure("2") do |config|
       vb.name = "microk8s-master-02"
     end
     microk8s_master_02.vm.provision "shell", inline: <<-EOF
-      export local_ip="$(ip route | grep default | grep enp0s9 | cut -d' ' -f9)"
-      echo $local_ip
-      microk8s.add-node | grep $local_ip | tee /vagrant/add_k8s
+        bash -x /vagrant/add_k8s
     EOF
   end
   config.vm.define "microk8s_master_03" do |microk8s_master_03|
@@ -52,8 +51,7 @@ Vagrant.configure("2") do |config|
       vb.name = "microk8s-master-03"
     end
     microk8s_master_03.vm.provision "shell", inline: <<-EOF
-      export local_ip="$(ip route | grep default | grep enp0s9 | cut -d' ' -f9)"
-      microk8s.add-node | grep $local_ip | tee /vagrant/add_k8s
+        bash -x /vagrant/add_k8s
     EOF
   end
   config.vm.define "microk8s_worker_01" do |microk8s_worker_01|
@@ -64,8 +62,7 @@ Vagrant.configure("2") do |config|
       vb.name = "microk8s-woker-01"
     end
     microk8s_worker_01.vm.provision "shell", inline: <<-EOF
-      export local_ip="$(ip route | grep default | grep enp0s9 | cut -d' ' -f9)"
-      microk8s.add-node  | grep $local_ip | tee /vagrant/add_k8s --worker
+        bash -x /vagrant/add_k8s
     EOF
   end
   config.vm.define "microk8s_worker_02" do |microk8s_worker_02|
@@ -76,8 +73,7 @@ Vagrant.configure("2") do |config|
       vb.name = "microk8s-worker-02"
     end
     microk8s_worker_02.vm.provision "shell", inline: <<-EOF
-      export local_ip="$(ip route | grep default | grep enp0s9 | cut -d' ' -f9)"
-      microk8s.add-node | grep $local_ip | tee /vagrant/add_k8s
+         bash -x /vagrant/add_k8s
     EOF
   end
   config.vm.define "microk8s_worker_03" do |microk8s_worker_03|
