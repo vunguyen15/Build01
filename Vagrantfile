@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
   config.winrm.timeout = 1800 # 30 minutes
   config.vm.boot_timeout = 1800 # 30 minutes
   config.vm.provider "virtualbox" do |vb|
-      vb.memory = 4096
+      vb.memory = 2048
       vb.cpus = 2
     end
   config.vm.provision "shell", inline: <<-EOF
@@ -17,11 +17,26 @@ Vagrant.configure("2") do |config|
     chown vagrant:vagrant /home/vagrant/.bash_aliases
     echo "alias kubectl='microk8s.kubectl'" > /root/.bash_aliases
     chown root:root /root/.bash_aliases
+    echo "
+  
+    #master
+    192.168.56.2  microk8s-master-01
+    192.168.56.3  microk8s-master-02
+    192.168.56.4  microk8s-master-03
+
+    #worker
+    192.168.56.5  microk8s-worker-1
+    192.168.56.6  microk8s-worker-2
+    192.168.56.7  microk8s-worker-3
+    192.168.56.8  microk8s-worker-4
+  
+    " > /etc/hosts
+    cat /etc/hosts
   EOF
 
   config.vm.define "microk8s_master_01" do |microk8s_master_01|
     microk8s_master_01.vm.hostname = "microk8s-master-01"
-    microk8s_master_01.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+    microk8s_master_01.vm.network "public_network", bridge: "VirtualBox Host-Only Ethernet Adapter"
     microk8s_master_01.vm.network "private_network", ip: "192.168.56.2"
     microk8s_master_01.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-master-01"
@@ -34,7 +49,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "microk8s_master_02" do |microk8s_master_02|
     microk8s_master_02.vm.hostname = "microk8s-master-02"
-    microk8s_master_02.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+    microk8s_master_02.vm.network "public_network", bridge: "VirtualBox Host-Only Ethernet Adapter"
     microk8s_master_02.vm.network "private_network", ip: "192.168.56.3"
     microk8s_master_02.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-master-02"
@@ -45,7 +60,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "microk8s_master_03" do |microk8s_master_03|
     microk8s_master_03.vm.hostname = "microk8s-master-03"
-    microk8s_master_03.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+    microk8s_master_03.vm.network "public_network", bridge: "VirtualBox Host-Only Ethernet Adapter"
     microk8s_master_03.vm.network "private_network", ip: "192.168.56.4"
     microk8s_master_03.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-master-03"
@@ -56,7 +71,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "microk8s_worker_01" do |microk8s_worker_01|
     microk8s_worker_01.vm.hostname = "microk8s-worker-01"
-    microk8s_worker_01.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+    microk8s_worker_01.vm.network "public_network", bridge: "VirtualBox Host-Only Ethernet Adapter"
     microk8s_worker_01.vm.network "private_network",  ip: "192.168.56.5"
     microk8s_worker_01.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-woker-01"
@@ -67,7 +82,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "microk8s_worker_02" do |microk8s_worker_02|
     microk8s_worker_02.vm.hostname = "microk8s-worker-02"
-    microk8s_worker_02.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+    microk8s_worker_02.vm.network "public_network", bridge: "VirtualBox Host-Only Ethernet Adapter"
     microk8s_worker_02.vm.network "private_network", ip: "192.168.56.6"
     microk8s_worker_02.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-worker-02"
@@ -78,7 +93,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "microk8s_worker_03" do |microk8s_worker_03|
     microk8s_worker_03.vm.hostname = "microk8s-worker-03"
-    microk8s_worker_03.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+    microk8s_worker_03.vm.network "public_network", bridge: "VirtualBox Host-Only Ethernet Adapter"
     microk8s_worker_03.vm.network "private_network", ip: "192.168.56.7"
     microk8s_worker_03.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-worker-03"
@@ -89,7 +104,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.define "microk8s_worker_04" do |microk8s_worker_04|
     microk8s_worker_04.vm.hostname = "microk8s-worker-04"
-    microk8s_worker_04.vm.network "public_network", bridge: "Realtek Gaming GbE Family Controller"
+    microk8s_worker_04.vm.network "public_network", bridge: "VirtualBox Host-Only Ethernet Adapter"
     microk8s_worker_04.vm.network "private_network",  ip: "192.168.56.8"
     microk8s_worker_04.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-worker-04"
