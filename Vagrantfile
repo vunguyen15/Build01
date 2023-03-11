@@ -41,11 +41,11 @@ Vagrant.configure("2") do |config|
     microk8s_master_01.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-master-01"
     end
-    microk8s_master_01.vm.provision "shell", inline: <<-EOF
-      export local_ip="$(ip route | grep enp0s9 | cut -d' ' -f9)"
-      echo $local_ip
-      microk8s.add-node | grep $local_ip | tee /vagrant/add_k8s
-    EOF
+    # microk8s_master_01.vm.provision "shell", inline: <<-EOF
+    #   export local_ip="$(ip route | grep enp0s9 | cut -d' ' -f9)"
+    #   echo $local_ip
+    #   microk8s.add-node | grep $local_ip | tee /vagrant/add_k8s
+    # EOF
   end
   config.vm.define "microk8s_master_02" do |microk8s_master_02|
     microk8s_master_02.vm.hostname = "microk8s-master-02"
@@ -54,9 +54,9 @@ Vagrant.configure("2") do |config|
     microk8s_master_02.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-master-02"
     end
-    microk8s_master_02.vm.provision "shell", inline: <<-EOF
-        bash -x /vagrant/add_k8s
-    EOF
+    # microk8s_master_02.vm.provision "shell", inline: <<-EOF
+    #     bash -x /vagrant/add_k8s
+    # EOF
   end
   config.vm.define "microk8s_master_03" do |microk8s_master_03|
     microk8s_master_03.vm.hostname = "microk8s-master-03"
@@ -65,9 +65,9 @@ Vagrant.configure("2") do |config|
     microk8s_master_03.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-master-03"
     end
-    microk8s_master_03.vm.provision "shell", inline: <<-EOF
-        bash -x /vagrant/add_k8s
-    EOF
+    # microk8s_master_03.vm.provision "shell", inline: <<-EOF
+    #     bash -x /vagrant/add_k8s
+    # EOF
   end
   config.vm.define "microk8s_worker_01" do |microk8s_worker_01|
     microk8s_worker_01.vm.hostname = "microk8s-worker-01"
@@ -76,9 +76,9 @@ Vagrant.configure("2") do |config|
     microk8s_worker_01.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-woker-01"
     end
-    microk8s_worker_01.vm.provision "shell", inline: <<-EOF
-        bash -x /vagrant/add_k8s
-    EOF
+    # microk8s_worker_01.vm.provision "shell", inline: <<-EOF
+    #     bash -x /vagrant/add_k8s
+    # EOF
   end
   config.vm.define "microk8s_worker_02" do |microk8s_worker_02|
     microk8s_worker_02.vm.hostname = "microk8s-worker-02"
@@ -87,9 +87,9 @@ Vagrant.configure("2") do |config|
     microk8s_worker_02.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-worker-02"
     end
-    microk8s_worker_02.vm.provision "shell", inline: <<-EOF
-         bash -x /vagrant/add_k8s
-    EOF
+    # microk8s_worker_02.vm.provision "shell", inline: <<-EOF
+    #      bash -x /vagrant/add_k8s
+    # EOF
   end
   config.vm.define "microk8s_worker_03" do |microk8s_worker_03|
     microk8s_worker_03.vm.hostname = "microk8s-worker-03"
@@ -98,9 +98,9 @@ Vagrant.configure("2") do |config|
     microk8s_worker_03.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-worker-03"
     end
-    microk8s_worker_03.vm.provision "shell", inline: <<-EOF
-      bash -x /vagrant/add_k8s
-    EOF
+    # microk8s_worker_03.vm.provision "shell", inline: <<-EOF
+    #   bash -x /vagrant/add_k8s
+    # EOF
   end
   config.vm.define "microk8s_worker_04" do |microk8s_worker_04|
     microk8s_worker_04.vm.hostname = "microk8s-worker-04"
@@ -109,8 +109,8 @@ Vagrant.configure("2") do |config|
     microk8s_worker_04.vm.provider "virtualbox" do |vb|
       vb.name = "microk8s-worker-04"
     end
-    microk8s_worker_04.vm.provision "shell", inline: <<-EOF
-      bash -x /vagrant/add_k8s
-    EOF
+    # microk8s_worker_04.vm.provision "shell", inline: <<-EOF
+    #   bash -x /vagrant/add_k8s
+    # EOF
   end
 end
